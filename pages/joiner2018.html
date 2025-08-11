@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pekora joiner (2018)</title>
+  <title>Connect to Pekora Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,17 +11,17 @@
       margin-top: 60px;
       background-color: #f4f4f4;
     }
-    input {
+    input, select {
       padding: 10px;
       font-size: 16px;
-      width: 220px;
+      margin: 5px;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
     button {
       padding: 10px 20px;
       font-size: 16px;
-      margin-left: 10px;
+      margin-top: 10px;
       border: none;
       background-color: #4CAF50;
       color: white;
@@ -42,24 +43,35 @@
   </style>
 </head>
 <body>
-  <h1>🎮 Pekora joiner (2018)</h1>
+  <h1>🎮 Connect to Pekora Game</h1>
+
+  <select id="year">
+    <option value="2017">Pekora 2017</option>
+    <option value="2018">Pekora 2018</option>
+  </select>
+
+  <br>
+
   <input type="text" id="placeID" placeholder="Enter Place ID">
+  <br>
   <button onclick="connectToGame()">Connect</button>
 
   <div id="fallback">
-    <p>If you dont have pekora client please donload it here: </p>
-    <a href="https://bablaerrr.github.io/pekora/pages/ios.html" target="_blank">Download Pekora</a>
+    <p>If the app doesn't open, you can download Pekora from the official page:</p>
+    <a href="https://bablaerrr.github.io/pekora/pages/ios.html" target="_blank">Open Pekora Page</a>
   </div>
 
   <script>
     function connectToGame() {
-      const placeID = document.getElementById('placeID').value.trim();
+      var placeID = document.getElementById('placeID').value.trim();
+      var year = document.getElementById('year').value;
+
       if (placeID) {
-        const url = `pekora2018://placeID=${placeID}`;
+        var scheme = 'pekora' + year;
+        var url = scheme + '://placeID=' + placeID;
         window.location.href = url;
 
-        // Show fallback link after a short delay
-        setTimeout(() => {
+        setTimeout(function() {
           document.getElementById('fallback').style.display = 'block';
         }, 1500);
       } else {
