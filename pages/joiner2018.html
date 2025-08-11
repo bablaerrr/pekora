@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Pekora joiner (2018)</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔗 Подключиться к Roblox</h1>
+  <input type="text" id="placeID" placeholder="Enter place ID">
+  <button onclick="connectToRoblox()">Connect</button>
+
+  <script>
+    function connectToRoblox() {
+      const placeID = document.getElementById('placeID').value.trim();
+      if (placeID) {
+        const url = `pekora2018://placeID=${placeID}`;
+        window.location.href = url;
+
+        // fallback через 1 секунду, если приложение не установлено
+        setTimeout(() => {
+          window.location.href = 'https://bablaerrr.github.io/pekora/pages/ios.html';
+        }, 1000);
+      } else {
+        alert("Введите корректный Place ID");
+      }
+    }
+  </script>
+</body>
+</html>
