@@ -43,9 +43,10 @@
   </style>
 </head>
 <body>
-  <h1>🎮 Korone joiner</h1>
+  <h1>🎮 Korone joiner- beta tests of 2014</h1>
 
   <select id="year">
+    <option value="2014xi">synt2x 2014</option>
     <option value="2017xi">Korone 2017</option>
     <option value="2018xi">Korone 2018</option>
   </select>
@@ -66,17 +67,27 @@
       var placeID = document.getElementById('placeID').value.trim();
       var year = document.getElementById('year').value;
 
-      if (placeID) {
-        var scheme = 'pekora' + year;
-        var url = scheme + '://placeID=' + placeID;
-        window.location.href = url;
-
-        setTimeout(function() {
-          document.getElementById('fallback').style.display = 'block';
-        }, 1500);
-      } else {
+      if (!placeID) {
         alert("Please enter a valid Place ID.");
+        return;
       }
+
+      var url = "";
+
+      if (year === "2014xi") {
+        // synt2x 2014 → отдельная схема
+        url = "synt2x2014xi://Game/PlaceLauncher.ashx?request=RequestGame&placeId=" + placeID;
+      } else {
+        // обычные схемы для pekora
+        var scheme = "pekora" + year;
+        url = scheme + "://placeID=" + placeID;
+      }
+
+      window.location.href = url;
+
+      setTimeout(function() {
+        document.getElementById('fallback').style.display = 'block';
+      }, 1500);
     }
   </script>
 </body>
