@@ -40,10 +40,22 @@
       text-decoration: none;
       font-weight: bold;
     }
+    #library {
+      margin-top: 40px;
+      font-size: 18px;
+    }
+    #library a {
+      color: #007aff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #library a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <h1>🎮 Korone joiner- beta tests of 2014</h1>
+  <h1>🎮 Korone joiner - beta tests of 2014</h1>
 
   <select id="year">
     <option value="2014xi">synt2x 2014</option>
@@ -62,6 +74,12 @@
     <a href="https://bablaerrr.github.io/pekora/pages/ios.html" target="_blank">Download clients</a>
   </div>
 
+  <!-- 🧩 Library of IDs section -->
+  <div id="library">
+    <p>📚 <strong>Library of IDs:</strong></p>
+    <a href="https://balaerrr.github.io/pekora/pages/lox.html" target="_blank">Open ID Library</a>
+  </div>
+
   <script>
     function connectToGame() {
       var placeID = document.getElementById('placeID').value.trim();
@@ -75,10 +93,8 @@
       var url = "";
 
       if (year === "2014xi") {
-        // synt2x 2014 → отдельная схема
         url = "synt2x2014xi://Game/PlaceLauncher.ashx?request=RequestGame&placeId=" + placeID;
       } else {
-        // обычные схемы для pekora
         var scheme = "pekora" + year;
         url = scheme + "://placeID=" + placeID;
       }
