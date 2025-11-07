@@ -68,14 +68,13 @@
 
   <input type="text" id="placeID" placeholder="Enter Place ID">
   <br>
-  <button onclick="connectToGame()">Connect</button>
+  <button id="connectBtn">Connect</button>
 
   <div id="fallback">
     <p>If the app doesn't open, you can download Pekora from this page:</p>
     <a href="https://bablaerrr.github.io/pekora/pages/ios.html" target="_blank">Download clients</a>
   </div>
 
-  <!-- 🧩 Library of IDs section -->
   <div id="library">
     <p>📚 <strong>Library of IDs:</strong></p>
     <a href="https://bablaerrr.github.io/pekora/pages/lox.html" target="_blank">Open ID Library</a>
@@ -83,32 +82,43 @@
 
   <script>
     function connectToGame() {
-      var placeID = document.getElementById('placeID').value.trim();
-      var year = document.getElementById('year').value;
+      const placeID = document.getElementById('placeID').value.trim();
+      const year = document.getElementById('year').value;
 
       if (!placeID) {
         alert("Please enter a valid Place ID.");
         return;
       }
 
-      var url = "";
+      let url = "";
 
       if (year === "games") {
-        // ✅ Для 2016 — просто путь /games/start
-        url = "https://watrbx.wtf/games/start?placeId=" + placeID;
+        // ✅ 2016: стандартный формат Roblox /games/start
+        url = "/games/start?placeId=" + placeID;
       } else if (year === "2014xi") {
         url = "synt2x2014xi://Game/PlaceLauncher.ashx?request=RequestGame&placeId=" + placeID;
       } else {
-        var scheme = "pekora" + year;
+        const scheme = "pekora" + year;
         url = scheme + "://placeID=" + placeID;
       }
 
-      window.location.href = url;
+      // переход как на Roblox-кнопке Play
+      window.location.assign(url);
 
-      setTimeout(function() {
+      setTimeout(() => {
         document.getElementById('fallback').style.display = 'block';
       }, 1500);
     }
+
+    // кнопка
+    document.getElementById('connectBtn').addEventListener('click', connectToGame);
+
+    // запуск по Enter
+    document.getElementById('placeID').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        connectToGame();
+      }
+    });
   </script>
 </body>
 </html>
