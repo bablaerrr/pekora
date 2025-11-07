@@ -55,10 +55,11 @@
   </style>
 </head>
 <body>
-  <h1>🎮 Korone joiner - beta tests of 2014</h1>
+  <h1>🎮 Korone joiner - 2016 IS COMING</h1>
 
   <select id="year">
     <option value="2014xi">synt2x 2014</option>
+    <option value="games">2016 (every revival)</option>
     <option value="2017xi">Korone 2017</option>
     <option value="2018xi">Korone 2018</option>
   </select>
@@ -92,7 +93,10 @@
 
       var url = "";
 
-      if (year === "2014xi") {
+      if (year === "games") {
+        // ✅ Для 2016 — просто путь /games/start
+        url = "/games/start?placeId=" + placeID;
+      } else if (year === "2014xi") {
         url = "synt2x2014xi://Game/PlaceLauncher.ashx?request=RequestGame&placeId=" + placeID;
       } else {
         var scheme = "pekora" + year;
